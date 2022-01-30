@@ -420,3 +420,24 @@ def kokoro(root_path, meta_file, **kwargs):  # pylint: disable=unused-argument
             text = cols[2].replace(" ", "")
             items.append([text, wav_file, speaker_name])
     return items
+
+
+def openslr_in(root_path, meta_files=None, ignored_speakers=None):
+    """http://www.openslr.org/94/"""
+    items = []
+    print ("openslr_in - meta_files: ", meta_files)
+    if not isinstance(meta_files, list) and isinstance(meta_files, str):
+        meta_files = [meta_files]
+    for meta_file in meta_files:
+        with open(os.path.join(root_path, meta_file), "r", encoding="utf-8") as meta:
+            for line in meta:
+                file, text = line.split("\t")
+                text = text[:-1]
+                lang, speaker, *_ = file.split("_")
+                wav_file = os.path.join(root_path, meta_file.split('.')[0],  file + ".wav")
+                # ignore speakers
+                if isinstance(ignored_speakers, list):
+                    if speaker in ignored_speakers:
+                        continue
+                items.append([text, wav_file, "openslr_" + lang + "_" + speaker])
+    return items

@@ -74,6 +74,7 @@ def load_tts_samples(
         if formatter is None:
             formatter = _get_formatter_by_name(name)
         # load train set
+        print (f" > Formatter found {name} ")
         meta_data_train = formatter(root_path, meta_file_train, ignored_speakers=ignored_speakers)
         meta_data_train = [[*item, language] for item in meta_data_train]
 

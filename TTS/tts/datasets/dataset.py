@@ -340,8 +340,18 @@ class TTSDataset(Dataset):
                 lengths.append(os.path.getsize(item[1]) / 16 * 8)  # assuming 16bit audio
             lengths = np.array(lengths)
         else:
+            print("Using the text lens")
             lengths = np.array([len(ins[0]) for ins in self.items])
-
+        
+        # somearr = []
+        # posarr = []
+        # for i, l in enumerate(lengths):
+        #     if l > 270:
+        #         somearr.append((self.items[i][0], len(self.items[i][0]), l))
+        #     else :
+        #         posarr.append((self.items[i][0], len(self.items[i][0]), l))
+        
+        # print (f'Some of the items are: {somearr[:5]} {posarr[:5]}')
         idxs = np.argsort(lengths)
         new_items = []
         ignored = []
