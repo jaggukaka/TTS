@@ -299,6 +299,10 @@ class Vits(BaseTTS):
             raise ValueError("config must be either a VitsConfig or VitsArgs")
 
         self.args = args
+        if self.config.speaker_encoder_config_path in None:
+            self.config.speaker_encoder_config_path = self.config.model_args.speaker_encoder_config_path
+        if self.config.speaker_encoder_model_path in None:
+            self.config.speaker_encoder_model_path = self.config.model_args.speaker_encoder_model_path
 
         self.init_multispeaker(config)
         self.init_multilingual(config)
