@@ -730,6 +730,8 @@ class Vits(BaseTTS):
         """
         assert self.num_speakers > 0, "num_speakers have to be larger than 0."
 
+        print (f"Printing use_speaker_embedding - {self.args.use_speaker_embedding}, use_d_vector_file - {self.args.use_d_vector_file}, args - {self.args}")
+
         # speaker embedding
         if self.args.use_speaker_embedding and not self.args.use_d_vector_file:
             g_src = self.emb_g(speaker_cond_src).unsqueeze(-1)
