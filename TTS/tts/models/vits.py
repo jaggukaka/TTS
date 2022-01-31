@@ -430,7 +430,7 @@ class Vits(BaseTTS):
                 and self.config.audio["sample_rate"] != self.speaker_manager.speaker_encoder.audio_config["sample_rate"]
             ):
                 self.audio_transform = torchaudio.transforms.Resample(
-                        orig_freq=self.audio_config["sample_rate"],
+                        orig_freq=self.config.audio["sample_rate"],
                         new_freq=self.speaker_manager.speaker_encoder.audio_config["sample_rate"],
                         )
             else:
