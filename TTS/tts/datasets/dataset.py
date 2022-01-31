@@ -421,7 +421,6 @@ class TTSDataset(Dataset):
             batch = {k: [dic[k] for dic in batch] for k in batch[0]}
 
             # get language ids from language names
-            print (f'Language ids: {self.language_id_mapping}, from batch: {batch["language_name"]}')
             if self.language_id_mapping is not None:
                 language_ids = [self.language_id_mapping[ln] for ln in batch["language_name"]]
             else:
