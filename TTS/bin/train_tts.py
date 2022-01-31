@@ -79,8 +79,9 @@ def main():
         language_manager = None
 
     # init the model from config
-    model = setup_model(config, speaker_manager, language_manager)
+
     print (f'Printing the config data  before calling Trainer {config}')
+    model = setup_model(config, speaker_manager, language_manager)
 
     # init the trainer and 🚀
     trainer = Trainer(
