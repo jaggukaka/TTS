@@ -304,8 +304,8 @@ class Vits(BaseTTS):
         if self.config.speaker_encoder_model_path in None:
             self.config.speaker_encoder_model_path = self.config.model_args.speaker_encoder_model_path
 
-        self.init_multispeaker(config)
-        self.init_multilingual(config)
+        self.init_multispeaker(self.config)
+        self.init_multilingual(self.config)
 
         self.length_scale = args.length_scale
         self.noise_scale = args.noise_scale
