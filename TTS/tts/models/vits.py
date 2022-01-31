@@ -734,7 +734,7 @@ class Vits(BaseTTS):
         if self.args.use_speaker_embedding and not self.args.use_d_vector_file:
             g_src = self.emb_g(speaker_cond_src).unsqueeze(-1)
             g_tgt = self.emb_g(speaker_cond_tgt).unsqueeze(-1)
-        elif self.args.use_speaker_embedding and self.args.use_d_vector_file:
+        elif self.args.use_speaker_embedding or self.args.use_d_vector_file:
             g_src = F.normalize(speaker_cond_src).unsqueeze(-1)
             g_tgt = F.normalize(speaker_cond_tgt).unsqueeze(-1)
         else:
