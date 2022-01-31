@@ -403,6 +403,9 @@ class Vits(BaseTTS):
         if self.args.use_d_vector_file:
             self._init_d_vector()
 
+        # remove this later
+        print (f'Printing the config data  before checking speaker_model_path {config}')
+
         # TODO: make this a function
         if self.args.use_speaker_encoder_as_loss:
             if self.speaker_manager.speaker_encoder is None and (

@@ -1,0 +1,25 @@
+{   
+    "model": "speaker_encoder",
+    "run_name": "speaker_encoder",
+    "run_description": "resnet speaker encoder trained with commonvoice all languages dev and train, Voxceleb 1 dev and Voxceleb 2 dev",
+    "datasets": [
+        {
+            "name": "openslr_in",
+            "path": "/home/arya/Documents/jaggukaka/TTS/datasets/resampled_telugu_openslr",
+            "meta_file_train": "/home/arya/Documents/jaggukaka/TTS/datasets/resampled_telugu_openslr/te_in_female.tsv",
+            "ignored_speakers": null,
+            "language": "te",
+            "meta_file_val": null,
+            "meta_file_attn_mask": ""
+        },
+        {
+            "name": "openslr_in",
+            "path": "/home/arya/Documents/jaggukaka/TTS/datasets/resampled_telugu_openslr",
+            "meta_file_train": "/home/arya/Documents/jaggukaka/TTS/datasets/resampled_telugu_openslr/te_in_male.tsv",
+            "ignored_speakers": null,
+            "language": "te",
+            "meta_file_val": null,
+            "meta_file_attn_mask": ""
+        }
+    ]
+}
