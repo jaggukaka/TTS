@@ -25,11 +25,13 @@ def main():
         if args.config_path:
             # init from a file
             config = load_config(args.config_path)
+            print (f'Printing the config data  before all processing block1 {config}')
             if len(config_overrides) > 0:
                 config.parse_known_args(config_overrides, relaxed_parser=True)
         elif args.continue_path:
             # continue from a prev experiment
             config = load_config(os.path.join(args.continue_path, "config.json"))
+            print (f'Printing the config data  before all processing block2 {config}')
             if len(config_overrides) > 0:
                 config.parse_known_args(config_overrides, relaxed_parser=True)
         else:
@@ -40,6 +42,7 @@ def main():
             config_base.parse_known_args(config_overrides)
             config = register_config(config_base.model)()
 
+    print (f'Printing the config data  before all processing {config}')
     # load training samples
     train_samples, eval_samples = load_tts_samples(config.datasets, eval_split=True)
 
