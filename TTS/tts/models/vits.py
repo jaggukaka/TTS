@@ -299,10 +299,13 @@ class Vits(BaseTTS):
             raise ValueError("config must be either a VitsConfig or VitsArgs")
 
         self.args = args
-        if self.config.speaker_encoder_config_path in None:
+        if self.config.speaker_encoder_config_path is None:
             self.config.speaker_encoder_config_path = self.config.model_args.speaker_encoder_config_path
-        if self.config.speaker_encoder_model_path in None:
+        if self.config.speaker_encoder_model_path is None:
             self.config.speaker_encoder_model_path = self.config.model_args.speaker_encoder_model_path
+
+        
+        print (f'Printing the config data  before init_multispeaker {self.config}')
 
         self.init_multispeaker(self.config)
         self.init_multilingual(self.config)
