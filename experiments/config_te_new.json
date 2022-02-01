@@ -1,9 +1,9 @@
 {
     "model": "vits",
-    "run_name": "vits_tts-telugu",
+    "run_name": "vits_tts-telugu-vcdemo",
     "run_description": "",
-    "epochs": 1000,
-    "batch_size": 30,
+    "epochs": 5,
+    "batch_size": 20,
     "eval_batch_size": 30,
     "mixed_precision": false,
     "scheduler_after_epoch": true,
@@ -11,8 +11,8 @@
     "test_delay_epochs": -1,
     "print_eval": true,
     "dashboard_logger": "tensorboard",
-    "print_step": 10,
-    "plot_step": 10,
+    "print_step": 25,
+    "plot_step": 100,
     "model_param_stats": false,
     "project_name": null,
     "log_model_step": 10000,
@@ -25,7 +25,7 @@
     "num_eval_loader_workers": 4,
     "use_noise_augment": false,
     "use_language_weighted_sampler": true,
-    "output_path": "/content/drive/MyDrive/tts_dubbing_coqui/checkpoints/VITS-multilingual/tts-telugu/openslr/run_2/",
+    "output_path": "/content/drive/MyDrive/tts_dubbing_coqui/checkpoints/VITS-multilingual/tts-telugu/openslr/run_vcdemo/",
     "distributed_backend": "nccl",
     "distributed_url": "tcp://localhost:54321",
     "audio": {
@@ -41,8 +41,10 @@
         "ref_level_db": 20,
         "do_sound_norm": false,
         "log_func": "np.log",
-        "do_trim_silence": true,
+        "do_trim_silence": false,
         "trim_db": 45,
+        "do_rms_norm": false,
+        "db_level": null,
         "power": 1.5,
         "griffin_lim_iters": 60,
         "num_mels": 80,
@@ -70,23 +72,24 @@
         "pad": "_",
         "eos": "&",
         "bos": "*",
-        "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\u0c08\u0c35\u0c3f\u0c3e\u0c26\u0c02\u0c38\u0c46\u0c2a\u0c4d\u0c1f\u0c2c\u0c30\u0c21\u0c41\u0c47\u0c32\u0c24\u0c4a\u0c2e\u0c28\u0c37\u0c15\u0c48\u0c12\u0c2f\u0c25\u0c20\u0c36\u0c09\u0c1a\u0c17\u0c33\u0c39\u0c4b\u0c42\u0c40\u0c05\u0c1c\u0c2b\\\u0c4c\u0c06\u0c23\u0c27\u0c0f\u0c07\u0c18\u0c16\u0c0e\u0c2d\u200c\u0c13\u0c43\u0c22\u0c0a\u0c10\u0c1b\u0c03\u0c1e\u0c0b\u0c14\u0c31\u0c19\u0c01!'(),-.:;? ",
+        "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\u0c08\u0c35\u0c3f\u0c3e\u0c26\u0c02\u0c38\u0c46\u0c2a\u0c4d\u0c1f\u0c2c\u0c30\u0c21\u0c41\u0c47\u0c32\u0c24\u0c4a\u0c2e\u0c28\u0c37\u0c15\u0c48\u0c12\u0c2f\u0c25\u0c20\u0c36\u0c09\u0c1a\u0c17\u0c33\u0c39\u0c4b\u0c42\u0c40\u0c05\u0c1c\u0c2b\\\u0c4c\u0c06\u0c23\u0c27\u0c0f\u0c07\u0c18\u0c16\u0c0e\u0c2d\u200c\u0c13\u0c43\u0c22\u0c0a\u0c10\u0c1b\u0c03\u0c1e\u0c0b\u0c14\u0c31\u0c19\u0c01",
         "punctuations": "!'(),-.:;? /",
         "phonemes": null,
         "unique": true
     },
     "batch_group_size": 0,
     "loss_masking": null,
-    "min_seq_len": 8,
-    "max_seq_len": 270,
+    "sort_by_audio_len": true,
+    "min_seq_len": 0,
+    "max_seq_len": 500000,
     "compute_f0": false,
     "compute_linear_spec": true,
     "add_blank": true,
     "datasets": [
         {
             "name": "openslr_in",
-            "path": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/resampled_telugu_openslr",
-            "meta_file_train": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/resampled_telugu_openslr/te_in_female.tsv",
+            "path": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/cutdowndata",
+            "meta_file_train": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/cutdowndata/te_in_female.tsv",
             "ignored_speakers": null,
             "language": "te",
             "meta_file_val": null,
@@ -94,8 +97,8 @@
         },
         {
             "name": "openslr_in",
-            "path": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/resampled_telugu_openslr",
-            "meta_file_train": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/resampled_telugu_openslr/te_in_male.tsv",
+            "path": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/cutdowndata",
+            "meta_file_train": "/content/drive/MyDrive/tts_dubbing_coqui/datasets/cutdowndata/te_in_male.tsv",
             "ignored_speakers": null,
             "language": "te",
             "meta_file_val": null,
@@ -115,133 +118,26 @@
     "lr_scheduler_params": null,
     "test_sentences": [
         [
-            "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-            "VCTK_p225",
-            null,
-            "en"
-        ],
-        [
-            "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-            "ED",
-            null,
-            "en"
-        ],
-        [
-            "It took me quite a long time to develop a voice, and now that I have it I'm not going to be silent.",
-            "bernard",
-            null,
-            "en"
-        ],
-        [
-            "This cake is great. It's so delicious and moist.",
-            "VCTK_p234",
-            null,
-            "en"
-        ],
-        [
-            "This cake is great. It's so delicious and moist.",
-            "ED",
-            null,
-            "en"
-        ],
-        [
-            "This cake is great. It's so delicious and moist.",
-            "ezwa",
-            null,
-            "en"
-        ],
-        [
-            "Hoje \u00e9 fundamental encontrar a raz\u00e3o da exist\u00eancia humana.",
-            "ED",
-            null,
-            "pt-br"
-        ],
-        [
-            "Hoje \u00e9 fundamental encontrar a raz\u00e3o da exist\u00eancia humana.",
-            "VCTK_p238",
-            null,
-            "pt-br"
-        ],
-        [
-            "Hoje \u00e9 fundamental encontrar a raz\u00e3o da exist\u00eancia humana.",
-            "gilles_g_le_blanc",
-            null,
-            "pt-br"
-        ],
-        [
-            "Em muitas cidades a popula\u00e7\u00e3o est\u00e1 diminuindo.",
-            "ED",
-            null,
-            "pt-br"
-        ],
-        [
-            "Em muitas cidades a popula\u00e7\u00e3o est\u00e1 diminuindo.",
-            "VCTK_p245",
-            null,
-            "pt-br"
-        ],
-        [
-            "Em muitas cidades a popula\u00e7\u00e3o est\u00e1 diminuindo.",
-            "nadine_eckert_boulet",
-            null,
-            "pt-br"
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "VCTK_p245",
-            null,
-            "fr-fr"
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "ED",
-            null,
-            "fr-fr"
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "ezwa",
-            null,
-            "fr-fr"
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "bernard",
-            null,
-            "fr-fr"
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "gilles_g_le_blanc",
-            null,
-            "fr-fr"
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "nadine_eckert_boulet",
-            null,
-            "fr-fr"
-        ],
-        [
-            "Il m'a fallu beaucoup de temps pour d\u00e9velopper une voix, et maintenant que je l'ai, je ne vais pas me taire.",
-            "zeckou",
-            null,
-            "fr-fr"
-        ],
-        [
-            "ఈ వివాదం సెప్టెంబర్ రెండు వేల తొమ్మిదిన పరిష్కారమైనది",
+            "సుదేష్మను వెయ్యి తొమ్మిది వందలు యాభై మూడులో వివాహమాడారు",
             "openslr_tef_05994",
             null,
             "te"
+        ],
+        [
+            "ఇక్కడ ఏమి జరగబోతోంది, ఇది నిజంగా నిరాశపరిచింది",
+            "openslr_tef_05994",
+            null,
+            "te"
+        ],
+        [
+          "Google అనువాదం అనేది టెక్స్ట్, డాక్యుమెంట్‌లు మరియు వెబ్‌సైట్‌లను ఒక భాష నుండి మరొక భాషలోకి అనువదించడానికి Google చే అభివృద్ధి చేయబడిన బహుభాషా నాడీ యంత్ర అనువాద సేవ. ఇది వెబ్‌సైట్ ఇంటర్‌ఫేస్, Android మరియు iOS కోసం మొబైల్ యాప్ మరియు డెవలపర్‌లకు బ్రౌజర్ పొడిగింపులు మరియు సాఫ్ట్‌వేర్ అప్లికేషన్‌లను రూపొందించడంలో సహాయపడే APIని అందిస్తుంది",
+          "openslr_tef_05994",
+          null,
+          "te"
         ]
     ],
-    "use_speaker_embedding": true,
-    "use_d_vector_file": false,
-    "d_vector_dim": 512,
-    "speaker_encoder_config_path": "/content/drive/MyDrive/tts_dubbing_coqui/config_te_se.json",
-    "speaker_encoder_model_path": "/content/drive/MyDrive/tts_dubbing_coqui/model_se.pth.tar",
     "model_args": {
-        "num_chars": 165,
+        "num_chars": 142,
         "out_channels": 513,
         "spec_segment_size": 62,
         "hidden_channels": 192,
@@ -257,7 +153,7 @@
         "kernel_size_flow": 5,
         "dilation_rate_flow": 1,
         "num_layers_flow": 4,
-        "resblock_type_decoder": 1,
+        "resblock_type_decoder": "1",
         "resblock_kernel_sizes_decoder": [
             3,
             7,
@@ -296,27 +192,27 @@
         "use_sdp": true,
         "noise_scale": 1.0,
         "inference_noise_scale": 0.667,
-        "length_scale": 1,
+        "length_scale": 1.0,
         "noise_scale_dp": 1.0,
         "inference_noise_scale_dp": 0.8,
         "max_inference_len": null,
         "init_discriminator": true,
         "use_spectral_norm_disriminator": false,
-        "use_speaker_embedding": true,
-        "num_speakers": 1244,
-        "speakers_file": null,
+        "use_speaker_embedding": false,
+        "num_speakers": 47,
+        "speakers_file": "/content/drive/MyDrive/tts_dubbing_coqui/checkpoints/VITS-multilingual/tts-telugu/openslr/run_vcdemo/vits_tts-telugu-vcdemo-February-01-2022_07+54AM-0000000/speakers.json",
         "d_vector_file": "/content/drive/MyDrive/tts_dubbing_coqui/speakers_te_pretrained_semodel.json",
         "speaker_embedding_channels": 512,
-        "use_d_vector_file": false,
+        "use_d_vector_file": true,
         "d_vector_dim": 512,
         "detach_dp_input": true,
         "use_language_embedding": true,
         "embedded_language_dim": 4,
-        "num_languages": 4,
+        "num_languages": 1,
+        "language_ids_file": "/content/drive/MyDrive/tts_dubbing_coqui/checkpoints/VITS-multilingual/tts-telugu/openslr/run_vcdemo/vits_tts-telugu-vcdemo-January-31-2022_06+08PM-0000000/language_ids.json",
         "use_speaker_encoder_as_loss": true,
-        "speaker_encoder_config_path": "/content/drive/MyDrive/tts_dubbing_coqui/config_te_se.json",
-        "speaker_encoder_model_path": "/content/drive/MyDrive/tts_dubbing_coqui/model_se.pth.tar",
-        "fine_tuning_mode": 0,
+        "speaker_encoder_config_path": "/content/drive/MyDrive/tts_dubbing_coqui/vc-demo-models/config_se.json",
+        "speaker_encoder_model_path": "/content/drive/MyDrive/tts_dubbing_coqui/vc-demo-models/SE_checkpoint.pth.tar",
         "freeze_encoder": false,
         "freeze_DP": false,
         "freeze_PE": false,
@@ -327,8 +223,8 @@
         5.0,
         5.0
     ],
-    "lr_gen": 0.0002,
-    "lr_disc": 0.0002,
+    "lr_gen": 1e-05,
+    "lr_disc": 2e-06,
     "lr_scheduler_gen": "ExponentialLR",
     "lr_scheduler_gen_params": {
         "gamma": 0.999875,
@@ -347,5 +243,14 @@
     "dur_loss_alpha": 1.0,
     "speaker_encoder_loss_alpha": 9.0,
     "return_wav": true,
-    "r": 1
+    "r": 1,
+    "num_speakers": 0,
+    "use_speaker_embedding": false,
+    "speakers_file": "/content/drive/MyDrive/tts_dubbing_coqui/checkpoints/VITS-multilingual/tts-telugu/openslr/run_vcdemo/vits_tts-telugu-vcdemo-February-01-2022_07+54AM-0000000/speakers.json",
+    "speaker_embedding_channels": 256,
+    "language_ids_file": "/content/drive/MyDrive/tts_dubbing_coqui/checkpoints/VITS-multilingual/tts-telugu/openslr/run_vcdemo/vits_tts-telugu-vcdemo-February-01-2022_07+54AM-0000000/language_ids.json",
+    "use_language_embedding": true,
+    "use_d_vector_file": true,
+    "d_vector_file": null,
+    "d_vector_dim": 512
 }
