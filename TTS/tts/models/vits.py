@@ -445,8 +445,8 @@ class Vits(BaseTTS):
 
     def _init_d_vector(self):
         # pylint: disable=attribute-defined-outside-init
-        if hasattr(self, "emb_g"):
-            raise ValueError("[!] Speaker embedding layer already initialized before d_vector settings.")
+        if hasattr(self, "emb_g") and self.embedded_speaker_dim != self.args.d_vector_dim:
+            raise ValueError(f"[!] Speaker embedding layer already initialized before d_vector settings. embedded_speaker_dim = {self.embedded_speaker_dim}, d_vector_dim = {self.args.d_vector_dim}")
         self.embedded_speaker_dim = self.args.d_vector_dim
 
     def init_multilingual(self, config: Coqpit):
