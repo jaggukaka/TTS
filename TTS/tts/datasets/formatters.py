@@ -442,3 +442,23 @@ def openslr_in(root_path, meta_files=None, ignored_speakers=None):
                         continue
                 items.append([text, wav_file, "openslr_" + lang + "_" + speaker])
     return items
+
+
+import pathlib
+def librispeech(root_path, meta_files=None, ignored_speakers=None):
+    items = []
+    meta_files = glob(f"{root_path}/**/*.trans.txt", recursive=True)
+    splitlist = []
+    for metafile in meta_files:
+      parents = pathlib.Path(metafile).parents
+      with open(metafile, 'r+') as mfc:
+        for line in mfc:
+          metadata = line.split(' ')
+          soundfile = os.path.join(parents[0], metadata[0])
+          wavpath = soundfile + '.wav'
+          text = ' '.join(metadata[1:]).strip()
+          speaker = parents[1].stem
+          splitlist.append([text, wavpath, 'librispeech_en_' + speaker])
+    
+
+    return splitlist
