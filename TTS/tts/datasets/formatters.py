@@ -458,7 +458,7 @@ def librispeech(root_path, meta_files=None, ignored_speakers=None):
           wavpath = soundfile + '.wav'
           text = ' '.join(metadata[1:]).strip()
           speaker = parents[1].stem
-          splitlist.append([text, wavpath, 'librispeech_en_' + speaker])
+          splitlist.append([text[:1] + text[1:].lower(), wavpath, 'librispeech_en_' + speaker])
     
 
     return splitlist
