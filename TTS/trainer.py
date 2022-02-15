@@ -446,13 +446,13 @@ class Trainer:
             model.load_state_dict(model_dict)
             del model_dict
 
-        if isinstance(self.optimizer, list):
-            for idx, optim in enumerate(optimizer):
-                for group in optim.param_groups:
-                    group["lr"] = self.get_lr(model, config)[idx]
-        else:
-            for group in optimizer.param_groups:
-                group["lr"] = self.get_lr(model, config)
+        # if isinstance(self.optimizer, list):
+        #     for idx, optim in enumerate(optimizer):
+        #         for group in optim.param_groups:
+        #             group["lr"] = self.get_lr(model, config)[idx]
+        # else:
+        #     for group in optimizer.param_groups:
+        #         group["lr"] = self.get_lr(model, config)
         print(
             " > Model restored from step %d" % checkpoint["step"],
         )
